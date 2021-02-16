@@ -1,3 +1,4 @@
+import os 
 from flask import Flask, jsonify
 from flask_restful import Api
 
@@ -29,7 +30,9 @@ jwt = JWT(app, authenticate, identity)      # auth_endpoint: /auth
 
 # SQLAlchemy Configuration
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///data.db")
+# "postgres://bhbshkidakkphb:d24fb10fa3c4e44123ebcf7b24b00cb38f8cdbb0658c834c94f6ba27b9744f64@ec2-3-213-85-90.compute-1.amazonaws.com:5432/d5olmhl87fmspp"
 
 @jwt.jwt_error_handler
 def customized_error_handler(error): 
