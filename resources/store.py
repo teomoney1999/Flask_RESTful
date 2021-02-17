@@ -36,7 +36,7 @@ class Store(Resource):
             except: 
                 return {"error_message": f"The store name {name} can not be deleted"}, 500
 
-        return {"error_message": f"A store name {name} is not exist"}, 400
+        return {"error_message": f"A store name {name} is not exist"}, 404
 
     # def put(self, name): 
     #     store = StoreModel.find_by_name(name)
