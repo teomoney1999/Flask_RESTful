@@ -12,9 +12,7 @@ class Store(Resource):
 
     @jwt_required()
     def get(self, name): 
-        print("====NAME", name)
-        store = StoreModel.query.filter_by(name=name).first() 
-        print("====STORE", store)
+        store = StoreModel.find_by_name(name)
         if store: 
             return store.json(), 200
         return {"error_message": f"A store name {name} is not found"}, 404
