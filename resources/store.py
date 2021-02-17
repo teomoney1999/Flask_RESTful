@@ -13,11 +13,11 @@ class Store(Resource):
         store = StoreModel.query.filter_by(name=name).first() 
         if store: 
             return store.json(), 200
-        return {"error_message": f"A store name {name} is not found"}, 400
+        return {"error_message": f"A store name {name} is not found"}, 404
 
     def post(self, name): 
         if StoreModel.find_by_name(name): 
-            return {"error_message": f"The store name {name} is already exist"}, 400
+            return {"error_message": f"The store name {name} is already exist"}, 404
         
         store = StoreModel(name)
         try: 
