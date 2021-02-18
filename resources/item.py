@@ -22,7 +22,7 @@ class Item(Resource):
         print("===Name get", name)
         result = ItemModel.find_by_name(name)
         if result: 
-            return {"result": [result.json()]}, 200
+            return {"result": result.json()}, 200
         return {"message": f"An item with name {name} does not exist"}, 404
 
     @jwt_required()

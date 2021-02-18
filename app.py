@@ -12,7 +12,7 @@ from resources.store import Store, StoreList
 
 from datetime import timedelta
 
-
+from db import db 
 app = Flask(__name__) 
 # app.config['JWT_AUTH_HEADER_PREFIX'] = 'teomoney'
 app.secret_key = "teomoney"
@@ -60,6 +60,6 @@ api.add_resource(ItemList, '/items/')
 api.add_resource(UserRegister, "/register")
 
 if __name__ == "__main__":
-    from db import db 
+    
     db.init_app(app)
     app.run(debug=True)
