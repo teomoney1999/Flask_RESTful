@@ -23,14 +23,14 @@ class Item(Resource):
         result = ItemModel.find_by_name(name)
         if result: 
             return {"result": [result.json()]}, 200
-        return {"message": f"An item with name {name} does not exist"}, 400
+        return {"message": f"An item with name {name} does not exist"}, 404
 
     @jwt_required()
     def post(self, name): 
         # if next(filter(lambda i: i == i.get("name"), items), None) is not None:
         #     return {"error_message": f"An item with name '{name}' is already exist"}, 400
         if ItemModel.find_by_name(name): 
-            return {"error_message": f"An item with name '{name}' is already exist"}, 400
+            return {"error_message": f"An item with name '{name}' is already exist"}, 404
  
         data = Item.parser.parse_args()
         posted_item = ItemModel(name, **data)
