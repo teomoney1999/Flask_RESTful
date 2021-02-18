@@ -19,6 +19,7 @@ class Item(Resource):
 
     @jwt_required()
     def get(self, name):
+        print("===Name", name)
         result = ItemModel.find_by_name(name)
         if result: 
             return {"result": [result.json()]}, 200
