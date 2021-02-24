@@ -7,4 +7,4 @@ db.init_app(app)
 def create_table():
     db.create_all() 
 
-app.run()
+# app.run()
