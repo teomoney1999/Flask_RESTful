@@ -5,7 +5,7 @@ from flask_restful import Api
 from flask_jwt import JWT
 from security import identity, authenticate
 
-from resources.user import UserRegister
+from resources.user import UserRegister, User
 
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
@@ -32,6 +32,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///data.db")
 # "postgres://bhbshkidakkphb:d24fb10fa3c4e44123ebcf7b24b00cb38f8cdbb0658c834c94f6ba27b9744f64@ec2-3-213-85-90.compute-1.amazonaws.com:5432/d5olmhl87fmspp"
+app.config['PROPAGATE_EXCEPTIONS'] = True
 
 @jwt.jwt_error_handler
 def customized_error_handler(error): 
@@ -54,6 +55,7 @@ api.add_resource(ItemList, '/items/')
 api.add_resource(Store, "/store/<string:name>")
 api.add_resource(Item, "/item/<string:name>")
 api.add_resource(UserRegister, "/register")
+api.add_resource(User, '/user/<int:user_id>')
 
 if __name__ == "__main__":
     from db import db 
