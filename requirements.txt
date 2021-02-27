@@ -2,6 +2,6 @@ Flask
 Flask-RESTful
 Flask-JWT
 Flask-SQLAlchemy
-Flask-JWT-Extended
+Flask-JWT-Extended==3.18.0
 
 # psycopg2
