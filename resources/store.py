@@ -10,7 +10,7 @@ class Store(Resource):
         help="Store is required name"
     )
 
-    @jwt_required
+    # @jwt_required
     def get(self, name): 
         store = StoreModel.find_by_name(name)
         if store: 
