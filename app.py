@@ -33,7 +33,7 @@ jwt = JWTManager(app)
 
 # Whenever we create a new access token, this function gonna decided 
 # should we add any extra data to that JWT as well
-@jwt.user_claim_loader
+@jwt.user_claims_loader
 def add_claims_to_jwt(identity):
     if identity == 1: 
         return {"is_admin": True}
