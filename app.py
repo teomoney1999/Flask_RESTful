@@ -31,6 +31,14 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 jwt = JWTManager(app)
 
+# Whenever we create a new access token, this function gonna decided 
+# should we add any extra data to that JWT as well
+@jwt.user_claim_loader
+def add_claims_to_jwt(identity):
+    if identity == 1: 
+        return {"is_admin": True}
+    return {"is_admin": False}
+
 api.add_resource(StoreList, '/stores/')
 api.add_resource(ItemList, '/items/')
 api.add_resource(Store, "/store/<string:name>")
