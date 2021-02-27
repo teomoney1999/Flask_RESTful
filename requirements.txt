@@ -1,6 +1,5 @@
 Flask
 Flask-RESTful
-Flask-JWT
 Flask-SQLAlchemy
 Flask-JWT-Extended==3.18.0
 
