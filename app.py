@@ -2,10 +2,10 @@ import os
 from flask import Flask, jsonify
 from flask_restful import Api
 
-from flask_jwt import JWT
-from security import identity, authenticate
+from flask_jwt_extended import JWTManager
 
-from resources.user import UserRegister, User
+
+from resources.user import UserRegister, User, UserLogin
 
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
@@ -24,8 +24,6 @@ app.config["JWT_AUTH_URL_RULE"] = "/login"
 app.config["JWT_EXPIRATION_DELTA"] = timedelta(seconds=1800)
 # Authentication key name 
 app.config["JWT_AUTH_USERNAME_KEY"] = "username"
-
-jwt = JWT(app, authenticate, identity)      # auth_endpoint: /auth
 
 # SQLAlchemy Configuration
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -49,6 +47,7 @@ def customized_response_handler(access_token, identity):
         "user_id": identity.id
     })
 
+jwt = JWTManager(app)
 
 api.add_resource(StoreList, '/stores/')
 api.add_resource(ItemList, '/items/')
@@ -56,6 +55,7 @@ api.add_resource(Store, "/store/<string:name>")
 api.add_resource(Item, "/item/<string:name>")
 api.add_resource(UserRegister, "/register")
 api.add_resource(User, '/user/<int:user_id>')
+api.add_resource(UserLogin, '/login')
 
 if __name__ == "__main__":
     from db import db 
