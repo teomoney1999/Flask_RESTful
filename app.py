@@ -12,7 +12,7 @@ from resources.store import Store, StoreList
 from datetime import timedelta
 
 app = Flask(__name__) 
-# app.config['JWT_AUTH_HEADER_PREFIX'] = 'teomoney'
+
 app.secret_key = "teomoney"
 
 api = Api(app)
